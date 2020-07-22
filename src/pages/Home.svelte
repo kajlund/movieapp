@@ -8,7 +8,7 @@
   import LoadMoreButton from '../components/LoadMoreButton.svelte';
   import Spinner from '../components/Spinner.svelte';
 
-  import { IMAGE_BASE_URL, BACKDROP_SIZE } from '../config';
+  import { IMAGE_BASE_URL, BACKDROP_SIZE, POSTER_SIZE } from '../config';
   import { fetchMovies } from '../api';
 
   let movies = { movies: [] };
@@ -52,14 +52,14 @@
 
 <Search on:search={handleSearch} />
 <Grid header={searchTerm ? 'Search Results' : 'Popular Movies'}>
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
+  {#each movies.movies as movie}
+    <Thumb
+      clickable
+      image={movie.poster_path && IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path}
+      movieId={movie.id} />
+  {/each}
 </Grid>
 
-<Thumb />
 <LoadMoreButton />
 <Spinner />
 
