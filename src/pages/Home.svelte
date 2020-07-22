@@ -8,6 +8,7 @@
   import LoadMoreButton from '../components/LoadMoreButton.svelte';
   import Spinner from '../components/Spinner.svelte';
 
+  import { IMAGE_BASE_URL, BACKDROP_SIZE } from '../config';
   import { fetchMovies } from '../api';
 
   let movies = { movies: [] };
@@ -32,7 +33,17 @@
   });
 </script>
 
-<Hero />
+{#if error}
+  <p>API fetch failed...</p>
+{:else}
+  {#if movies.heroImage && !searchTerm}
+    <Hero
+      image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${movies.heroImage.backdrop_path}`}
+      title={movies.heroImage.original_title}
+      text={movies.heroImage.overview} />
+  {/if}
+{/if}
+
 <Search />
 <Grid />
 <Thumb />
