@@ -21,7 +21,7 @@
       isLoading = true;
       error = false;
       movies = await fetchMovies(movies, loadMore, searchTerm);
-      console.log(movies);
+      // console.log(movies);
     } catch (err) {
       error = true;
     }
@@ -33,6 +33,8 @@
     movies.movies = [];
     handleFetchMovies(false, searchTerm);
   };
+
+  const handleLoadMore = () => handleFetchMovies(true, searchTerm);
 
   onMount(async () => {
     handleFetchMovies(false, searchTerm);
@@ -60,8 +62,13 @@
   {/each}
 </Grid>
 
-<LoadMoreButton />
-<Spinner />
+{#if isLoading}
+  <Spinner />
+{/if}
+
+{#if !isLoading && movies.currentPage < movies.totalPages}
+  <LoadMoreButton on:loadMore={handleLoadMore}>Load More</LoadMoreButton>
+{/if}
 
 <style>
 
