@@ -28,6 +28,12 @@
     isLoading = false;
   };
 
+  const handleSearch = event => {
+    searchTerm = event.detail.searchText;
+    movies.movies = [];
+    handleFetchMovies(false, searchTerm);
+  };
+
   onMount(async () => {
     handleFetchMovies(false, searchTerm);
   });
@@ -44,7 +50,7 @@
   {/if}
 {/if}
 
-<Search />
+<Search on:search={handleSearch} />
 <Grid />
 <Thumb />
 <LoadMoreButton />
