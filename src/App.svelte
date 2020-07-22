@@ -1,8 +1,8 @@
 <script>
-
+  import Home from './pages/Home.svelte';
 </script>
 
-App
+<Home />
 
 <style>
   :global(body) {
