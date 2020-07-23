@@ -1,8 +1,16 @@
 <script>
-
+  export let movie;
 </script>
 
-Navigation
+<div class="wrapper">
+  <div class="content">
+    <a href="/">
+      <p>Home</p>
+    </a>
+    <p>|</p>
+    <p>{movie}</p>
+  </div>
+</div>
 
 <style>
   .wrapper {

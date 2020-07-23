@@ -22,7 +22,7 @@
       isLoading = true;
       error = false;
       movie = await fetchMovie(params.id);
-      // console.log(movie);
+      console.log(movie);
     } catch (err) {
       error = true;
       console.log(err);
@@ -39,7 +39,7 @@
   <p>Fetching movie data failed</p>
 {:else if movie}
   <div transition:fade={{ duration: 300 }}>
-    <Navigation />
+    <Navigation movie={movie.original_title} />
     <MovieInfo />
     <MovieInfoBar />
     <Grid header="Actors" />
