@@ -41,7 +41,10 @@
   <div transition:fade={{ duration: 300 }}>
     <Navigation movie={movie.original_title} />
     <MovieInfo {movie} />
-    <MovieInfoBar />
+    <MovieInfoBar
+      time={movie.runtime}
+      budget={movie.budget}
+      revenue={movie.revenue} />
     <Grid header="Actors" />
     <Actor />
   </div>
