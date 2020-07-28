@@ -31,8 +31,21 @@
   };
 
   onMount(async () => {
-    handleFetchMovie();
+    const localMovie = window.localStorage.getItem(params.id);
+    if (localMovie) {
+      console.log(`Loading movie ${params.id} from cache`);
+      movie = JSON.parse(localMovie);
+    } else {
+      console.log(`Loading movie ${params.id} from API`);
+      handleFetchMovie();
+    }
   });
+
+  $: {
+    if (movie) {
+      window.localStorage.setItem(params.id, JSON.stringify(movie));
+    }
+  }
 </script>
 
 {#if error}

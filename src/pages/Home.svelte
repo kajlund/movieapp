@@ -37,8 +37,21 @@
   const handleLoadMore = () => handleFetchMovies(true, searchTerm);
 
   onMount(async () => {
-    handleFetchMovies(false, searchTerm);
+    const sessionMovies = window.sessionStorage.getItem('movieapp');
+    if (sessionMovies) {
+      console.log('Loading popular movies from cache');
+      movies = JSON.parse(sessionMovies);
+    } else {
+      console.log('No cache. Loading popular movies from API');
+      handleFetchMovies(false, searchTerm);
+    }
   });
+
+  $: {
+    if (movies.movies.length > 0) {
+      window.sessionStorage.setItem('movieapp', JSON.stringify(movies));
+    }
+  }
 </script>
 
 {#if error}
